@@ -1,3 +1,4 @@
+// Package cpfcnpj provides functions for validate CPF and CNPJ, the Brazilian taxpayer registry identification document
 package cpfcnpj
 
 import (

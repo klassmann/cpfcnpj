@@ -26,5 +26,8 @@ func sumDigit(s string, table []int) int {
 
 // Clean can be used for cleaning formatted documents
 func Clean(s string) string {
-	return strings.Trim(s, ".-/")
+	s = strings.Replace(s, ".", "", -1)
+	s = strings.Replace(s, "-", "", -1)
+	s = strings.Replace(s, "/", "", -1)
+	return s
 }

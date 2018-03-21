@@ -5,6 +5,12 @@ It is an essential package for include validation for these numbers in your appl
 
 Eg: It can be used in a payment system or account system.
 
+## Information about CPF and CNPJ
+
+- [Article - TransferWise](https://transferwise.com/gb/blog/cpf-cnpj-meaning-brazil)
+- [Wikipedia - CNPJ](https://en.wikipedia.org/wiki/CNPJ)
+- [Wikipedia - CPF](https://en.wikipedia.org/wiki/Cadastro_de_Pessoas_F%C3%ADsicas)
+
 ## Installation
 Use the `go tool` for do that:
 ```bash
@@ -59,3 +65,6 @@ Clean the formatted document
 cpf := cpfcnpj.Clean("111.222.333-99")
 cnpj := cpfcnpj.Clean("10.963.268/0001-82")
 ```
+
+## License
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat)](https://opensource.org/licenses/Apache-2.0)

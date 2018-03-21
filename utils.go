@@ -1,6 +1,9 @@
 package cpfcnpj
 
-import "strconv"
+import (
+	"strconv"
+	"strings"
+)
 
 func sumDigit(s string, table []int) int {
 
@@ -19,4 +22,9 @@ func sumDigit(s string, table []int) int {
 	}
 
 	return sum
+}
+
+// Clean can be used for cleaning formatted documents
+func Clean(s string) string {
+	return strings.Trim(s, ".-/")
 }

@@ -17,3 +17,19 @@ func TestSumDigitOnlyOnes(t *testing.T) {
 		t.Errorf("Invalid result: %d", v)
 	}
 }
+
+func TestClean1(t *testing.T) {
+	s := Clean("111.222.333-99")
+
+	if s != "11122233399" {
+		t.Errorf("Invalid result: %s", s)
+	}
+}
+
+func TestClean2(t *testing.T) {
+	s := Clean("10.963.268/0001-82")
+
+	if s != "10963268000182" {
+		t.Errorf("Invalid result: %s", s)
+	}
+}

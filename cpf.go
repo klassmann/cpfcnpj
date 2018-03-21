@@ -2,33 +2,24 @@
 package cpfcnpj
 
 import (
+	"fmt"
 	"strconv"
 )
 
-func sumCPF(cpf string) int {
-	sum := 0
-	tamanho := len(cpf)
-	for i, c := range cpf {
-		s := string(c)
-		n, err := strconv.Atoi(s)
-		if err == nil {
-			pos := (tamanho + 1) - i
-			s := pos * n
-			sum += s
-		}
-	}
-
-	return sum
-}
+var (
+	cpfFirstDigitTable  = []int{10, 9, 8, 7, 6, 5, 4, 3, 2}
+	cpfSecondDigitTable = []int{11, 10, 9, 8, 7, 6, 5, 4, 3, 2}
+)
 
 // ValidateCPF validates a CPF document
+// You should use without punctuation
 func ValidateCPF(cpf string) bool {
 	if len(cpf) != 11 {
 		return false
 	}
 
 	firstPart := cpf[0:9]
-	sum := sumCPF(firstPart)
+	sum := sumDigit(firstPart, cpfFirstDigitTable)
 
 	r1 := sum % 11
 	d1 := 0
@@ -39,7 +30,7 @@ func ValidateCPF(cpf string) bool {
 
 	secondPart := firstPart + strconv.Itoa(d1)
 
-	dsum := sumCPF(secondPart)
+	dsum := sumDigit(secondPart, cpfSecondDigitTable)
 
 	r2 := dsum % 11
 	d2 := 0
@@ -48,6 +39,6 @@ func ValidateCPF(cpf string) bool {
 		d2 = 11 - r2
 	}
 
-	final := secondPart + strconv.Itoa(d2)
-	return final == cpf
+	finalPart := fmt.Sprintf("%s%d%d", firstPart, d1, d2)
+	return finalPart == cpf
 }

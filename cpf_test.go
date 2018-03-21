@@ -4,22 +4,6 @@ import (
 	"testing"
 )
 
-func TestSumCPFOnlyZeroes(t *testing.T) {
-	v := sumCPF("00000000000")
-
-	if v != 0 {
-		t.Errorf("Invalid result: %d", v)
-	}
-}
-
-func TestSumCPFOnlyOnes(t *testing.T) {
-	v := sumCPF("11111111111")
-
-	if v != 77 {
-		t.Errorf("Invalid result: %d", v)
-	}
-}
-
 func TestValidCPFWithValidNumber1(t *testing.T) {
 	r := ValidateCPF("64844696793")
 

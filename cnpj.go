@@ -1,11 +1,47 @@
 package cpfcnpj
 
-import "fmt"
+import (
+	"fmt"
+	"regexp"
+)
 
 var (
 	cnpjFirstDigitTable  = []int{5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2}
 	cnpjSecondDigitTable = []int{6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2}
 )
+
+// CNPJ type definition
+type CNPJ string
+
+// NewCNPJ is a helper function to convert and clean a new CNPJ
+// from a string
+func NewCNPJ(s string) CNPJ {
+	return CNPJ(Clean(s))
+}
+
+// IsValid returns if CNPJ is a valid CNPJ document
+func (c *CNPJ) IsValid() bool {
+	return ValidateCNPJ(string(*c))
+}
+
+// String returns a formatted CNPJ document
+// 00.000.000/0001-00
+func (c *CNPJ) String() string {
+
+	str := string(*c)
+
+	if !c.IsValid() {
+		return str
+	}
+
+	expr, err := regexp.Compile("([0-9]{2})([-0-9]{3})([0-9]{3})([0-9]{4})([0-9]{2})")
+
+	if err != nil {
+		return str
+	}
+
+	return expr.ReplaceAllString(str, "$1.$2.$3/$4-$5")
+}
 
 // ValidateCNPJ validates a CNPJ document
 // You should use without punctuation

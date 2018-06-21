@@ -10,6 +10,12 @@ var (
 	cnpjSecondDigitTable = []int{6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2}
 )
 
+const (
+	// CNPJFormatPattern is the pattern for string replacement
+	// with Regex
+	CNPJFormatPattern string = `([\d]{2})([\d]{3})([\d]{3})([\d]{4})([\d]{2})`
+)
+
 // CNPJ type definition
 type CNPJ string
 
@@ -34,7 +40,7 @@ func (c *CNPJ) String() string {
 		return str
 	}
 
-	expr, err := regexp.Compile("([0-9]{2})([-0-9]{3})([0-9]{3})([0-9]{4})([0-9]{2})")
+	expr, err := regexp.Compile(CNPJFormatPattern)
 
 	if err != nil {
 		return str

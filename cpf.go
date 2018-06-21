@@ -3,6 +3,7 @@ package cpfcnpj
 
 import (
 	"fmt"
+	"regexp"
 	"strconv"
 )
 
@@ -10,6 +11,45 @@ var (
 	cpfFirstDigitTable  = []int{10, 9, 8, 7, 6, 5, 4, 3, 2}
 	cpfSecondDigitTable = []int{11, 10, 9, 8, 7, 6, 5, 4, 3, 2}
 )
+
+const (
+	// CPFFormatPattern is the pattern for string replacement
+	// with Regex
+	CPFFormatPattern string = `([\d]{3})([\d]{3})([\d]{3})([\d]{2})`
+)
+
+// CPF type definition
+type CPF string
+
+// NewCPF is a helper function to convert and clean a new CPF
+// from a string
+func NewCPF(s string) CPF {
+	return CPF(Clean(s))
+}
+
+// IsValid returns if CPF is a valid CPF document
+func (c *CPF) IsValid() bool {
+	return ValidateCPF(string(*c))
+}
+
+// String returns a formatted CPF document
+// 000.000.000-00
+func (c *CPF) String() string {
+
+	str := string(*c)
+
+	if !c.IsValid() {
+		return str
+	}
+
+	expr, err := regexp.Compile(CPFFormatPattern)
+
+	if err != nil {
+		return str
+	}
+
+	return expr.ReplaceAllString(str, "$1.$2.$3-$4")
+}
 
 // ValidateCPF validates a CPF document
 // You should use without punctuation

@@ -14,7 +14,7 @@ Eg: It can be used in a payment system or account system.
 ## Installation
 Use the `go tool` for do that:
 ```bash
-go get https://github.com/klassmann/cpfcnpj
+$ go get github.com/klassmann/cpfcnpj
 ```
 
 ## Usage
@@ -27,6 +27,36 @@ import (
 )
 ```
 
+## Example
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/klassmann/cpfcnpj"
+)
+
+func main() {
+
+	// This will initialize a new CNPJ and clear the string
+	cnpj := cpfcnpj.NewCNPJ("70.082.591/0001-79")
+
+	// Verifies if it is a valid document
+	if !cnpj.IsValid() {
+		panic(fmt.Errorf("it is not a valid document: %v", cnpj))
+	}
+
+	// Cleaned output
+	fmt.Printf("%v\n", cnpj)
+	// Output: 70082591000179
+
+	// Formatted output
+	fmt.Println(cnpj.String())
+	// Output: 70.082.591/0001-79
+}
+```
 
 ### Function: `cpfcnpj.ValidateCPF(s string) bool`
 Validates the CPF document

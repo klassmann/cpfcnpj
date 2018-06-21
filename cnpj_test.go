@@ -49,3 +49,45 @@ func TestValidCNPJWithValidNumber3(t *testing.T) {
 		t.Errorf("Invalid result: %v", r)
 	}
 }
+
+func TestCNPJTypeIsValidWithValidNumber(t *testing.T) {
+	var cnpj CNPJ = "22796729000159"
+
+	if !cnpj.IsValid() {
+		t.Errorf("Invalid result: false")
+	}
+}
+
+func TestCNPJTypeIsValidWithInvalidNumber(t *testing.T) {
+	var cnpj CNPJ = "62009392000103"
+
+	if cnpj.IsValid() {
+		t.Errorf("Invalid result: true")
+	}
+}
+
+func TestCNPJTypeStringFormattingWithValidNumber(t *testing.T) {
+	var cnpj CNPJ = "22796729000159"
+	r := cnpj.String()
+
+	if r != "22.796.729/0001-59" {
+		t.Errorf("Invalid result: %v", r)
+	}
+}
+
+func TestCNPJTypeStringFormattingWithInvalidNumber(t *testing.T) {
+	var cnpj CNPJ = "62009392000103"
+	r := cnpj.String()
+
+	if r != "62009392000103" {
+		t.Errorf("Invalid result: %v", r)
+	}
+}
+
+func TestCNPJNewCNPJ(t *testing.T) {
+	cnpj := NewCNPJ("22.796.729/0001-59")
+
+	if cnpj != "22796729000159" {
+		t.Errorf("Invalid result: %v", cnpj)
+	}
+}

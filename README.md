@@ -97,4 +97,4 @@ cnpj := cpfcnpj.Clean("10.963.268/0001-82")
 ```
 
 ## License
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat)](https://opensource.org/licenses/Apache-2.0)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat)](LICENSE)
